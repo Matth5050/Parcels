@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Parcels!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  </head>
+  <body>
+    @using Parcels.Models;
+    @using System.Collections.Generic;
+    @using System.Linq;
+
+    <h1>Welcome to the Parcels Shipping!</h1>
+    <form action="/home" method="post">
+      <label for="name">Name: </label>
+      <input id="name" name="name" type="text">
+      <label for="length">Length(in): </label>
+      <input id="length" name="length" type="number">
+      <label for="width">Width(in): </label>
+      <input id="width" name="width" type="number">
+      <label for="height">Height(in): </label>
+      <input id="height" name="height" type="number">
+      <label for="weight">Weight(lbs): </label>
+      <input id="weight" name="weight" type="number">
+      <label for="distance">Distance(miles): </label>
+      <input id="distance" name="distance" type="number">      
+      <button type="submit">Calculate Shipping Cost</button>
+    </form>
+
+    <h4>Parcels being shipped at the moment.</h4>
+    @if (Model.Count != 0)
+    {
+      @foreach (Parcel parcel in Model)
+      {
+        <div class="container">
+          <p>@parcel.Name</p>
+          <p>$@parcel.CostToShip()</p> 
+          <p>@parcel.Volume() ft cubed</p>
+        </div> 
+      }
+    }
+
+    <h4></h4>
+    <!-- loop to show all the parcels and their cost-->
+  </body>
+</html>
